@@ -1,11 +1,11 @@
 import { useRef, useEffect, useState } from "react";
-import { Headphones, Music, Mic2, Award } from "lucide-react";
+import Icon from "@/components/ui/icon";
 
 const achievements = [
-  { icon: <Headphones className="w-6 h-6" />, label: "Лет опыта", value: "10+" },
-  { icon: <Music className="w-6 h-6" />, label: "Созданных треков", value: "500+" },
-  { icon: <Mic2 className="w-6 h-6" />, label: "Коллабораций с артистами", value: "100+" },
-  { icon: <Award className="w-6 h-6" />, label: "Наград", value: "15+" },
+  { icon: "Car", label: "Авто в парке", value: "30+" },
+  { icon: "Clock", label: "Лет на рынке", value: "7+" },
+  { icon: "Users", label: "Клиентов обслужено", value: "2000+" },
+  { icon: "Award", label: "Рейтинг", value: "4.9★" },
 ];
 
 const AboutSection = () => {
@@ -54,26 +54,23 @@ const AboutSection = () => {
         >
           <div className="relative">
             <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/0 rounded-3xl transform -rotate-6"></div>
-            <div className="w-full aspect-square bg-gradient-to-br from-zinc-800 to-zinc-900 rounded-3xl relative z-10 flex items-center justify-center">
-              <div className="text-center p-8">
-                <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center">
-                  <Music className="w-16 h-16 text-white" />
-                </div>
-                <p className="text-zinc-400 text-lg">Фото продюсера</p>
-              </div>
+            <div className="w-full aspect-square bg-gradient-to-br from-zinc-800 to-zinc-900 rounded-3xl relative z-10 flex items-center justify-center overflow-hidden">
+              <img
+                src="https://cdn.poehali.dev/projects/e07d7ac9-5de7-4e6c-9e88-35d263cc333d/files/9ee43d6a-54ab-4ca7-a375-1e9fc422844c.jpg"
+                alt="Премиум автопарк"
+                className="w-full h-full object-cover rounded-3xl opacity-80"
+              />
             </div>
           </div>
           <div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">О SoundForge</h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">О PrestigeDrive</h2>
             <p className="text-lg mb-6 text-zinc-300">
-              SoundForge — это не просто битмейкер, это звуковой архитектор, создающий саундскейпы
-              будущего. С десятилетним опытом и чутким слухом на инновации, SoundForge раздвигает
-              границы возможного в музыкальном продакшене.
+              PrestigeDrive — сервис премиальной аренды автомобилей в Перми. Мы собрали лучшие
+              автомобили бизнес- и представительского класса, чтобы каждая поездка стала особенной.
             </p>
             <p className="text-lg mb-8 text-zinc-300">
-              От хитов в чартах до андеграундных гимнов — универсальный стиль и внимание к деталям
-              гарантируют, что каждый бит — это не просто трек, а путешествие, ждущее правильного
-              артиста.
+              Деловые переговоры, свадьба, торжество или просто желание прокатиться с комфортом —
+              мы подберём идеальный автомобиль и обеспечим безупречный сервис на каждом этапе.
             </p>
             <div className="grid grid-cols-2 gap-6">
               {achievements.map((achievement, index) => (
@@ -85,7 +82,9 @@ const AboutSection = () => {
                   style={{ transitionDelay: `${index * 100}ms` }}
                 >
                   <div className="flex items-center mb-2">
-                    <div className="mr-2 text-white">{achievement.icon}</div>
+                    <div className="mr-2 text-white">
+                      <Icon name={achievement.icon} size={24} />
+                    </div>
                     <div className="text-2xl font-bold text-white">{achievement.value}</div>
                   </div>
                   <div className="text-sm text-zinc-400">{achievement.label}</div>

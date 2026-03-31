@@ -1,71 +1,75 @@
 import { useState, useRef, useEffect } from "react";
-import { Check, X, Crown, Zap, Star, Globe } from "lucide-react";
+import { Check, Crown, Zap, Star, Car } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
-interface LicenseOption {
+interface TariffOption {
   name: string;
   price: string;
+  period: string;
   icon: React.ReactNode;
   features: string[];
-  notIncluded?: string[];
   bulkDeal?: string;
   popular?: boolean;
 }
 
-const licenseOptions: LicenseOption[] = [
+const tariffOptions: TariffOption[] = [
   {
-    name: "Стандартная лицензия",
-    price: "299 руб",
+    name: "Эконом-премиум",
+    price: "от 4 900 ₽",
+    period: "/ сутки",
     icon: <Star className="w-6 h-6" />,
     features: [
-      "Использование для записи музыки",
-      "Распространение до 5 000 копий",
-      "75 000 онлайн-прослушиваний",
-      "1 музыкальный клип",
-      "Коммерческие выступления",
-      "Радиотрансляция (2 станции)",
+      "Audi A6 / BMW 5 Series",
+      "Пробег до 300 км/день",
+      "КАСКО и ОСАГО включены",
+      "Доставка по городу",
+      "Круглосуточная поддержка",
+      "Аренда от 1 суток",
     ],
-    bulkDeal: "КУПИ 1 ТРЕК — ПОЛУЧИ 1 В ПОДАРОК!",
+    bulkDeal: "АРЕНДА 3 ДНЯ — СКИДКА 10%!",
   },
   {
-    name: "Продвинутая лицензия",
-    price: "499 руб",
+    name: "Бизнес-класс",
+    price: "от 7 500 ₽",
+    period: "/ сутки",
     icon: <Zap className="w-6 h-6" />,
     features: [
-      "Использование для записи музыки",
-      "Распространение до 10 000 копий",
-      "150 000 онлайн-прослушиваний",
-      "1 музыкальный клип",
-      "Коммерческие выступления",
-      "Радиотрансляция (без ограничений)",
+      "Mercedes E-Class / BMW 7 Series",
+      "Пробег до 400 км/день",
+      "КАСКО и ОСАГО включены",
+      "Доставка в аэропорт",
+      "Круглосуточная поддержка",
+      "Аренда от 1 суток",
     ],
     popular: true,
   },
   {
-    name: "Премиум лицензия",
-    price: "799 руб",
+    name: "Представительский",
+    price: "от 12 000 ₽",
+    period: "/ сутки",
     icon: <Crown className="w-6 h-6" />,
     features: [
-      "Использование для записи музыки",
-      "Распространение до 20 000 копий",
-      "500 000 онлайн-прослушиваний",
-      "1 музыкальный клип",
-      "Только некоммерческие выступления",
+      "Mercedes S-Class / Bentley",
+      "Неограниченный пробег",
+      "КАСКО и ОСАГО включены",
+      "Доставка по Перми и области",
+      "Личный менеджер 24/7",
+      "Встреча в аэропорту",
     ],
-    notIncluded: ["Без прав на радиотрансляцию"],
   },
   {
-    name: "Коммерческая лицензия",
-    price: "899 руб",
-    icon: <Globe className="w-6 h-6" />,
+    name: "Длительная аренда",
+    price: "от 79 000 ₽",
+    period: "/ месяц",
+    icon: <Car className="w-6 h-6" />,
     features: [
-      "Использование для записи музыки",
-      "Неограниченное распространение",
-      "Неограниченные онлайн-прослушивания",
-      "Неограниченное количество клипов",
-      "Коммерческие выступления",
-      "Радиотрансляция (без ограничений)",
+      "Любой автомобиль парка",
+      "Неограниченный пробег",
+      "Полная страховка включена",
+      "Замена авто при ТО",
+      "Персональный менеджер",
+      "Без залога",
     ],
   },
 ];
@@ -102,15 +106,15 @@ const LicenseSection = () => {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
           }`}
         >
-          <h2 className="text-5xl md:text-6xl font-bold mb-6 text-white">Выбери свою лицензию</h2>
+          <h2 className="text-5xl md:text-6xl font-bold mb-6 text-white">Выбери свой тариф</h2>
           <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
-            Подбери идеальную лицензию под свои потребности и начни создавать потрясающую музыку уже
-            сегодня
+            Подбери идеальный автомобиль для любого случая — деловая встреча, торжество или просто
+            удовольствие от езды
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {licenseOptions.map((option, index) => (
+          {tariffOptions.map((option, index) => (
             <div
               key={option.name}
               className={`transition-all duration-500 ${
@@ -144,6 +148,7 @@ const LicenseSection = () => {
                     </div>
                     <h3 className="text-xl font-bold mb-2 text-white">{option.name}</h3>
                     <div className="text-3xl font-bold text-white">{option.price}</div>
+                    <div className="text-sm text-zinc-500">{option.period}</div>
                   </div>
 
                   <div className="flex-grow">
@@ -152,12 +157,6 @@ const LicenseSection = () => {
                         <li key={i} className="flex items-start">
                           <Check className="h-5 w-5 text-white mr-2 shrink-0 mt-0.5" />
                           <span className="text-sm text-zinc-300">{feature}</span>
-                        </li>
-                      ))}
-                      {option.notIncluded?.map((feature, i) => (
-                        <li key={i} className="flex items-start text-zinc-500">
-                          <X className="h-5 w-5 text-zinc-500 mr-2 shrink-0 mt-0.5" />
-                          <span className="text-sm">{feature}</span>
                         </li>
                       ))}
                     </ul>
@@ -173,11 +172,8 @@ const LicenseSection = () => {
 
                   <Button
                     className="w-full bg-white text-black hover:bg-zinc-200 transition-colors"
-                    asChild
                   >
-                    <a href="#" target="_blank" rel="noopener noreferrer">
-                      Выбрать
-                    </a>
+                    Забронировать
                   </Button>
                 </CardContent>
               </Card>
